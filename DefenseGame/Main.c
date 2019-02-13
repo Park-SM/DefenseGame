@@ -5,7 +5,7 @@
 
 int main() {
 
-	printf("Lee minhyuk!!!!!!!!");
+	printf("Lee minhyuk");
 
 	system("PAUSE");
 	return 0;
