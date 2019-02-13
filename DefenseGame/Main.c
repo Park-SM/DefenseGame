@@ -5,7 +5,8 @@
 
 int main() {
 
+	printf("Park SangMin");
 
-	sytem("PAUSE");
+	system("PAUSE");
 	return 0;
 }
