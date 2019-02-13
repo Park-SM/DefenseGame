@@ -3,9 +3,9 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-int main() 
-{
-	printf("Lee minhyuk@@@@@");
+int main() {
+
+	printf("Lee minhyuk");
 
 	system("PAUSE");
 	return 0;
