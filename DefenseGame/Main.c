@@ -3,8 +3,8 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-int main() {
-
+int main() 
+{
 	printf("Lee minhyuk@@@@@");
 
 	system("PAUSE");
