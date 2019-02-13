@@ -5,7 +5,7 @@
 
 int main() {
 
-	printf("Park SangMin");
+	printf("Lee minhyuk!!!!!!!!");
 
 	system("PAUSE");
 	return 0;
