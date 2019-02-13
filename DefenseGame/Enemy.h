@@ -9,9 +9,5 @@ typedef struct tagEnemy {
 	struct tagEnemy *NextEnemy;
 }ENEMY;
 
-typedef struct tagEnemyList {
-	ENEMY *HeadEnemy;
-	ENEMY *TailEnemy;
-}ELIST;
 
 #endif

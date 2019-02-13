@@ -9,9 +9,5 @@ typedef struct tagBullet {
 	struct tagBullet *NextBullet;
 }BULLET;
 
-typedef struct tagBulletList {
-	BULLET *HeadBullet;
-	BULLET *TailBullet;
-}BLIST;
 
 #endif
