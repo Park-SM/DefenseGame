@@ -2,6 +2,7 @@
 #define _ENEMY_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct tagEnemy {
 	char type;
@@ -11,5 +12,6 @@ typedef struct tagEnemy {
 	struct tagEnemy *NextEnemy;
 }ENEMY;
 
+ENEMY* CreateEnemy(int gate);
 
 #endif

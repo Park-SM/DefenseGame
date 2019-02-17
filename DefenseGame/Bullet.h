@@ -2,6 +2,7 @@
 #define _BULLET_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct tagBullet {
 	char type;
@@ -11,5 +12,6 @@ typedef struct tagBullet {
 	struct tagBullet *NextBullet;
 }BULLET;
 
+BULLET* CreateBullet(int uX);
 
 #endif

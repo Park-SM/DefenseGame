@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 ENEMY* CreateEnemy(int gate) {
-	ENEMY* NewEnemy = (ENEMY*)malloc(sizeof(ENEMY));
+	ENEMY *NewEnemy = (ENEMY*)malloc(sizeof(ENEMY));
 
 	NewEnemy->type = 'e';
 	NewEnemy->x = gate;
