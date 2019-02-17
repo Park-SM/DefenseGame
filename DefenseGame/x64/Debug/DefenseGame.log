@@ -1,6 +1,7 @@
-﻿  Bullet.c
-  Enemy.c
+﻿  Enemy.c
+c:\users\park sangmin\desktop\defensegame\defensegame\enemy.c(4): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\park sangmin\desktop\defensegame\defensegame\enemy.c(4): warning C4312: '형식 캐스트': 'int'에서 더 큰 'ENEMY *'(으)로의 변환입니다.
   List.c
   Main.c
   코드를 생성하고 있습니다...
-  DefenseGame.vcxproj -> C:\Users\Park Sang Min\Desktop\DefenseGame\x64\Debug\DefenseGame.exe
+  DefenseGame.vcxproj -> C:\Users\Park Sangmin\Desktop\DefenseGame\x64\Debug\DefenseGame.exe
