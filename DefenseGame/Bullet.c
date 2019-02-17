@@ -8,6 +8,7 @@ BULLET* CreateEnemy(int x)
 	NewBullet->x = x;
 	NewBullet->y = 22;
 	NewBullet->shape = "ก่";
+	NewBullet->NextBullet = NULL;
 
 	return NewBullet;
 }
