@@ -12,6 +12,6 @@ typedef struct tagBullet {
 	struct tagBullet *NextBullet;
 }BULLET;
 
-BULLET* CreateBullet(int uX);
+BULLET* CreateBullet(int gate);
 
 #endif

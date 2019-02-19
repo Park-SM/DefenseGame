@@ -24,7 +24,7 @@
     <ClCompile Include="Enemy.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="List.c">
+    <ClCompile Include="Stack.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="Bullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="Stack.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

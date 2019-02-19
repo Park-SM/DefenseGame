@@ -117,13 +117,13 @@
   <ItemGroup>
     <ClCompile Include="Bullet.c" />
     <ClCompile Include="Enemy.c" />
-    <ClCompile Include="List.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Stack.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="List.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
