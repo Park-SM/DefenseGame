@@ -10,21 +10,17 @@ int AppendNode(HASHLIST *hList, void* NewNode) {		// If successful, the return v
 	if (*((char*)NewNode) == 'b') {
 		if (hList->BulletGate[((BULLET*)NewNode)->x] == NULL) {
 			hList->BulletGate[((BULLET*)NewNode)->x] = (BULLET*)NewNode;
-		} else {
-			BULLET *Temp = hList->BulletGate[((BULLET*)NewNode)->x];
-			while (Temp->NextBullet != NULL) Temp = Temp->NextBullet;
-			Temp->NextBullet = (BULLET*)NewNode;
-		}
+		} else
+			hList->TailBullet[((BULLET*)NewNode)->x]->NextBullet = (BULLET*)NewNode;
+
 		hList->TailBullet[((BULLET*)NewNode)->x] = NewNode;		// Updates the address of the tail node.
 
 	} else if (*((char*)NewNode) == 'e') {
 		if (hList->EnemyGate[((ENEMY*)NewNode)->x] == NULL) {
 			hList->EnemyGate[((ENEMY*)NewNode)->x] = (ENEMY*)NewNode;
-		} else {
-			ENEMY *Temp = hList->EnemyGate[((ENEMY*)NewNode)->x];
-			while (Temp->NextEnemy != NULL) Temp = Temp->NextEnemy;
-			Temp->NextEnemy = (ENEMY*)NewNode;
-		}
+		} else 
+			hList->TailBullet[((ENEMY*)NewNode)->x]->NextBullet = (ENEMY*)NewNode;
+		
 		hList->TailBullet[((ENEMY*)NewNode)->x] = NewNode;		// Updates the address of the tail node.
 
 	} else return 0;

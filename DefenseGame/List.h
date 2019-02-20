@@ -7,8 +7,8 @@
 typedef struct tagHashList {
 	BULLET *BulletGate[15];
 	ENEMY *EnemyGate[15];
-	void *TailBullet[15];		// Maintains the address of the tail node.
-	void *TailEnmey[15];			// Maintains the address of the tail node.
+	BULLET *TailBullet[15];		// Maintains the address of the tail node.
+	ENEMY *TailEnmey[15];			// Maintains the address of the tail node.
 }HASHLIST;
 
 HASHLIST* CreateHashList();

@@ -1,2 +1,5 @@
-﻿  Main.c
+﻿  List.c
+c:\users\park sang min\desktop\defensegame\defensegame\list.c(22): warning C4133: '=': 'ENEMY *'과(와) 'tagBullet *' 사이의 형식이 호환되지 않습니다.
+  Main.c
+  코드를 생성하고 있습니다...
   DefenseGame.vcxproj -> C:\Users\Park Sang Min\Desktop\DefenseGame\x64\Debug\DefenseGame.exe
