@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 BULLET* CreateBullet(int gate){
-	BULLET* NewBullet = (BULLET *)malloc(sizeof(BULLET));
+	BULLET* NewBullet = (BULLET*)malloc(sizeof(BULLET));
 	
 	NewBullet->type = 'b';
 	NewBullet->x = gate;

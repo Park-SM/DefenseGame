@@ -1,23 +1,59 @@
+#include <conio.h>
 #include "Bullet.h"
 #include "Enemy.h"
 #include "List.h"
+#include "Stage.h"
+
+#define FREQ_F_PB 5
 
 int main() {
-	// Testing Code.. //
+
+	char key;
+	int Frame_PrintBullet = FREQ_F_PB;
+	CURSOR Cur = { 0, 23, "бу" };
 	HASHLIST *hList = CreateHashList();
-	BULLET *NewNode = CreateBullet(5);
-	BULLET *SecNode = CreateBullet(5);
-	BULLET *ThiNode = CreateBullet(5);
 
-	printf("%d.\n", AppendNode(hList, NewNode));
-	printf("About NewNode: %p, %p\n", NewNode, hList->TailBullet[5]);
+	HideCursors();
+	PrintCharator(&Cur, 1, 'c');
+	while (1) {
 
-	printf("\n%d.\n", AppendNode(hList, SecNode));
-	printf("About SecNode: %p, %p\n", SecNode, hList->BulletGate[5]->NextBullet);
+		if (--Frame_PrintBullet == 0) {
+			PrintHashList(hList, 0, 'b');
+			ShiftNode(hList, 'b');
+			PrintHashList(hList, 1, 'b');
+			Frame_PrintBullet = FREQ_F_PB;
+		}
 
-	printf("\n%d.\n", AppendNode(hList, ThiNode));
-	printf("About ThiNode: %p, %p\n", ThiNode, hList->TailBullet[5]);
+		if (_kbhit()) {
+			key = _getch();
+			switch (key) {
+			case LEFT:
+				if (Cur.x > 1) {
+					PrintCharator(&Cur, 0, 'c');
+					Cur.x -= 2;
+					PrintCharator(&Cur, 1, 'c');
+				}
+				break;
 
+			case RIGHT:
+				if (Cur.x < 27) {
+					PrintCharator(&Cur, 0, 'c');
+					Cur.x += 2;
+					PrintCharator(&Cur, 1, 'c');
+				}
+				break;
+
+			case SPACE:
+				AppendNode(hList, Cur.x / 2, CreateBullet (Cur.x / 2));
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		Sleep(10);
+	}
 
 	system("PAUSE");
 	return 0;
