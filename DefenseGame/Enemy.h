@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct tagEnemy {
 	char type;
@@ -12,6 +13,6 @@ typedef struct tagEnemy {
 	struct tagEnemy *NextEnemy;
 }ENEMY;
 
-ENEMY* CreateEnemy(int gate);
+ENEMY* CreateEnemy();
 
 #endif

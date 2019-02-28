@@ -7,14 +7,14 @@ HASHLIST* CreateHashList() {
 
 int AppendNode(HASHLIST *hList, int index, void* NewNode) {		// If successful, the return value is 1.
 	if (*((char*)NewNode) == 'b') {
-		if (hList->BulletGate[index] == NULL) hList->BulletGate[((BULLET*)NewNode)->x] = (BULLET*)NewNode;
+		if (hList->BulletGate[index] == NULL) hList->BulletGate[index] = (BULLET*)NewNode;
 		else hList->TailBullet[index]->NextBullet = (BULLET*)NewNode;
 		hList->TailBullet[index] = (BULLET*)NewNode;		// Updates the address of the tail node.
 
 	} else if (*((char*)NewNode) == 'e') {
-		if (hList->EnemyGate[index] == NULL) hList->EnemyGate[((ENEMY*)NewNode)->x] = (ENEMY*)NewNode;
-		else hList->TailEnemy[index]->NextEnemy = (ENEMY*)NewNode;
-		hList->TailEnemy[index] = (ENEMY*)NewNode;		// Updates the address of the tail node.
+		if (hList->EnemyGate[((ENEMY*)NewNode)->x] == NULL) hList->EnemyGate[((ENEMY*)NewNode)->x] = (ENEMY*)NewNode;
+		else hList->TailEnemy[((ENEMY*)NewNode)->x]->NextEnemy = (ENEMY*)NewNode;
+		hList->TailEnemy[((ENEMY*)NewNode)->x] = (ENEMY*)NewNode;		// Updates the address of the tail node.
 
 	} else return 0;
 
@@ -28,7 +28,9 @@ void ShiftNode(HASHLIST *hList, const char type) {
 			if (hList->BulletGate[i] != NULL) {
 				BULLET *Current = hList->BulletGate[i];
 				while (Current != NULL) {
-					if (--(Current->y) < 1) {
+					if (CollisionCheck(hList, i) != 0) {
+						Current = hList->BulletGate[i];
+					} else if (--(Current->y) < 1) {
 						DeleteHeadNode(hList, i, 'b');
 						Current = hList->BulletGate[i];
 					} else Current = Current->NextBullet;
@@ -97,4 +99,17 @@ void PrintHashList(HASHLIST *hList, int exist, const char type) {
 			}
 		}
 	}
+}
+
+int CollisionCheck(HASHLIST *hList, int index) {
+	if (hList->BulletGate[index] != NULL && hList->EnemyGate[index] != NULL) {
+		if (hList->BulletGate[index]->y < hList->EnemyGate[index]->y) {
+			PrintCharator(hList->BulletGate[index], 0, 'b');
+			DeleteHeadNode(hList, index, 'b');
+			PrintCharator(hList->EnemyGate[index], 0, 'e');
+			DeleteHeadNode(hList, index, 'e');
+			return 1;
+		}
+	}
+	return 0;
 }

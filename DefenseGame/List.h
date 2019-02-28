@@ -17,5 +17,6 @@ int AppendNode(HASHLIST *hList, int index, void* NewNode);
 void ShiftNode(HASHLIST *hList, const char type);
 void DeleteHeadNode(HASHLIST *hList, int index, const char type);
 void PrintHashList(HASHLIST *hList, int exist, const char type);
+int CollisionCheck(HASHLIST *hList, int index);
 
 #endif

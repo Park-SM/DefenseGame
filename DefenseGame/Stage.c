@@ -35,3 +35,5 @@ void PrintCharator(void *Node, int exist, const char type) {
 		break;
 	}
 }
+
+
