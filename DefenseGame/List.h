@@ -14,7 +14,8 @@ typedef struct tagHashList {
 
 HASHLIST* CreateHashList();
 int AppendNode(HASHLIST *hList, int index, void* NewNode);
-void ShiftNode(HASHLIST *hList, const char type);
+int ShiftNode(HASHLIST *hList, const char type);
+void DeleteAllList(HASHLIST *hList, int capacity);
 void DeleteHeadNode(HASHLIST *hList, int index, const char type);
 void PrintHashList(HASHLIST *hList, int exist, const char type);
 int CollisionCheck(HASHLIST *hList, int index);

@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+static int FREQ_E_PE = 50;
+static int FREQ_E_AS = 60;
+
 typedef struct tagEnemy {
 	char type;
 	int x;
@@ -13,6 +16,8 @@ typedef struct tagEnemy {
 	struct tagEnemy *NextEnemy;
 }ENEMY;
 
-ENEMY* CreateEnemy();
+ENEMY* CreateEnemy(int gate);
+void FreqDown();
+void FreqReset();
 
 #endif

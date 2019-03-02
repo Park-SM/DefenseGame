@@ -5,7 +5,7 @@ HASHLIST* CreateHashList() {
 	return nHashList;
 }
 
-int AppendNode(HASHLIST *hList, int index, void* NewNode) {		// If successful, the return value is 1.
+int AppendNode(HASHLIST *hList, int index, void *NewNode) {		// If successful, the return value is 1.
 	if (*((char*)NewNode) == 'b') {
 		if (hList->BulletGate[index] == NULL) hList->BulletGate[index] = (BULLET*)NewNode;
 		else hList->TailBullet[index]->NextBullet = (BULLET*)NewNode;
@@ -21,7 +21,7 @@ int AppendNode(HASHLIST *hList, int index, void* NewNode) {		// If successful, t
 	return 1;
 }
 
-void ShiftNode(HASHLIST *hList, const char type) {
+int ShiftNode(HASHLIST *hList, const char type) {
 	if (type == 'b') {
 		int i;
 		for (i = 0; i < 15; i++) {
@@ -30,7 +30,7 @@ void ShiftNode(HASHLIST *hList, const char type) {
 				while (Current != NULL) {
 					if (CollisionCheck(hList, i) != 0) {
 						Current = hList->BulletGate[i];
-					} else if (--(Current->y) < 1) {
+					} else if (--(Current->y) < 2) {
 						DeleteHeadNode(hList, i, 'b');
 						Current = hList->BulletGate[i];
 					} else Current = Current->NextBullet;
@@ -46,13 +46,36 @@ void ShiftNode(HASHLIST *hList, const char type) {
 				while (Current != NULL) {
 					if (++(Current->y) > 23) {
 						DeleteHeadNode(hList, i, 'e');
+						if (UpdateScoreOrHeart(Current->y, Heart)) return 1;
 						Current = hList->EnemyGate[i];
 					} else Current = Current->NextEnemy;
 				}
 			}
 		}
 	}
+	return 0;
+}
 
+void DeleteAllNode(void *Node) {
+	if (Node != NULL && *((char*)Node) == 'b') {
+		if (((BULLET*)Node)->NextBullet != NULL) DeleteAllNode(((BULLET*)Node)->NextBullet);
+		free((BULLET*)Node);
+	} else if (Node != NULL && *((char*)Node) == 'e') {
+		if (((ENEMY*)Node)->NextEnemy != NULL) DeleteAllNode(((ENEMY*)Node)->NextEnemy);
+		free((ENEMY*)Node);
+	}
+}
+
+void DeleteAllList(HASHLIST *hList, int capacity) {
+	int i;
+	for (i = 0; i < capacity; i++) {
+		DeleteAllNode(hList->BulletGate[i]);
+		hList->BulletGate[i] = NULL;
+	}
+	for (i = 0; i < capacity; i++) {
+		DeleteAllNode(hList->EnemyGate[i]);
+		hList->EnemyGate[i] = NULL;
+	}
 }
 
 void DeleteHeadNode(HASHLIST *hList, int index, const char type) {
@@ -104,6 +127,7 @@ void PrintHashList(HASHLIST *hList, int exist, const char type) {
 int CollisionCheck(HASHLIST *hList, int index) {
 	if (hList->BulletGate[index] != NULL && hList->EnemyGate[index] != NULL) {
 		if (hList->BulletGate[index]->y < hList->EnemyGate[index]->y) {
+			UpdateScoreOrHeart(hList->BulletGate[index]->y, Score);
 			PrintCharator(hList->BulletGate[index], 0, 'b');
 			DeleteHeadNode(hList, index, 'b');
 			PrintCharator(hList->EnemyGate[index], 0, 'e');

@@ -1,24 +1,21 @@
-#include <conio.h>
 #include "Bullet.h"
 #include "Enemy.h"
 #include "List.h"
 #include "Stage.h"
 
-#define FREQ_B_PB 5
-
 int main() {
 
 	char key;
-	int FREQ_E_PE = 100;
-	int FREQ_E_AS = 120;
 	int Frame_PrintBullet = FREQ_B_PB;
 	int Frame_PrintEnemy = FREQ_E_PE;
 	int Frame_AppearEnemy = FREQ_E_AS;
-	CURSOR Cur = { 0, 23, "бу" };
+	CURSOR Cur = { 4, 23, "бу" };
 	HASHLIST *hList = CreateHashList();
 
 	srand((unsigned int)time(NULL));
 	HideCursors();
+	PrintGameDisplay();
+	PrintGameInfo(All);
 	PrintCharator(&Cur, 1, 'c');
 
 	while (1) {
@@ -32,7 +29,10 @@ int main() {
 
 		if (--Frame_PrintEnemy == 0) {
 			PrintHashList(hList, 0, 'e');
-			ShiftNode(hList, 'e');
+			if (ShiftNode(hList, 'e')) {
+				if (TheEnd() == 1) DeleteAllList(hList, 15);
+				else return 0;
+			}
 			PrintHashList(hList, 1, 'e');
 			Frame_PrintEnemy = FREQ_E_PE;
 		}
@@ -46,23 +46,23 @@ int main() {
 			key = _getch();
 			switch (key) {
 			case LEFT:
-				if (Cur.x > 1) {
+				if (Cur.x > 4) {
 					PrintCharator(&Cur, 0, 'c');
-					Cur.x -= 2;
+					Cur.x -= 4;
 					PrintCharator(&Cur, 1, 'c');
 				}
 				break;
 
 			case RIGHT:
-				if (Cur.x < 27) {
+				if (Cur.x < 58) {
 					PrintCharator(&Cur, 0, 'c');
-					Cur.x += 2;
+					Cur.x += 4;
 					PrintCharator(&Cur, 1, 'c');
 				}
 				break;
 
 			case SPACE:
-				AppendNode(hList, Cur.x / 2, CreateBullet (Cur.x / 2));
+				AppendNode(hList, (Cur.x / 4) - 1, CreateBullet((Cur.x / 4) - 1));
 				break;
 
 			default:
