@@ -17,7 +17,5 @@ typedef struct tagEnemy {
 }ENEMY;
 
 ENEMY* CreateEnemy(int gate);
-void FreqDown();
-void FreqReset();
 
 #endif

@@ -22,7 +22,12 @@ int main() {
 
 		if (--Frame_PrintBullet == 0) {
 			PrintHashList(hList, 0, 'b');
-			ShiftNode(hList, 'b');
+			if (ShiftNode(hList, 'b') == 2) {
+				LevelUp();
+				DeleteAllList(hList, 15);
+				FREQ_E_PE -= 10;
+				FREQ_E_AS -= 10;
+			}
 			PrintHashList(hList, 1, 'b');
 			Frame_PrintBullet = FREQ_B_PB;
 		}
@@ -30,8 +35,11 @@ int main() {
 		if (--Frame_PrintEnemy == 0) {
 			PrintHashList(hList, 0, 'e');
 			if (ShiftNode(hList, 'e')) {
-				if (TheEnd() == 1) DeleteAllList(hList, 15);
-				else return 0;
+				if (TheEnd() == 1) {
+					FREQ_E_PE = 50;
+					FREQ_E_AS = 60;
+					DeleteAllList(hList, 15);
+				} else return 0;
 			}
 			PrintHashList(hList, 1, 'e');
 			Frame_PrintEnemy = FREQ_E_PE;

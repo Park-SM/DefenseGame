@@ -33,6 +33,7 @@ void PrintGameDisplay();
 void PrintCharator(void *Node, int exist, const char type);
 void PrintGameInfo(enum gInfoType type);
 int UpdateScoreOrHeart(int collision_y, enum gINfoType type);
+void LevelUp();
 int TheEnd();
 
 #endif

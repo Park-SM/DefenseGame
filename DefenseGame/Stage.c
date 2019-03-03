@@ -26,9 +26,9 @@ void PrintGameDisplay() {
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
-	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
-	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
-	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
+	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì     [Game Control Key]");
+	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì      - SpaceBar : Fire");
+	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì      - ¡ç    ¡æ : Shift Cursor");
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
 	puts("  ¢Ì  ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¦¢   ¢Ì");
@@ -99,14 +99,10 @@ int UpdateScoreOrHeart(int collision_y, enum gINfoType type) {
 	if (type == Score) {
 		int i;
 		gInfo.kill++;
-		for (i = 3; i < 24; i++) gInfo.Score += (collision_y - 2) * 11;
+		gInfo.Score += (collision_y - 2) * 11;
 		if (gInfo.kill == 25 || gInfo.kill == 50 || gInfo.kill == 100 || gInfo.kill == 150) {
 			gInfo.Level++;
-
-			system("cls");
-			FreqDown();
-			PrintGameDisplay();
-			PrintGameInfo(All);
+			return 2;
 		} else {
 			PrintGameInfo(Kill);
 			PrintGameInfo(Score);
@@ -119,6 +115,16 @@ int UpdateScoreOrHeart(int collision_y, enum gINfoType type) {
 	return 0;
 }
 
+void LevelUp() {
+	gotoxy(18, 11); printf("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤");
+	gotoxy(18, 12); printf("¦¢     L e v e l  U p !!     ¦¢");
+	gotoxy(18, 13); printf("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥");
+	Sleep(2000);
+	system("cls");
+	PrintGameDisplay();
+	PrintGameInfo(All);
+}
+
 int TheEnd() {
 	char key;
 	int i, j;
@@ -126,14 +132,14 @@ int TheEnd() {
 		gotoxy(4, i);
 		for (j = 0; j < 30; j++) {
 			printf("¢Ì");
-			//Sleep(3);
+			Sleep(3);
 		}
 	}
 	Sleep(100);
-	gotoxy(20, 11); printf("                             ");
-	gotoxy(20, 12); printf("     G a m e  O v e r !!     ");
-	gotoxy(20, 13); printf("     Restart: R  Exit: E     ");
-	gotoxy(20, 14); printf("                             ");
+	gotoxy(18, 11); printf("                             ");
+	gotoxy(18, 12); printf("     G a m e  O v e r !!     ");
+	gotoxy(18, 13); printf("     Restart: R  Exit: E     ");
+	gotoxy(18, 14); printf("                             ");
 
 	while (1) {
 		key = _getch();
@@ -146,7 +152,6 @@ int TheEnd() {
 			system("cls");
 			PrintGameDisplay();
 			PrintGameInfo(All);
-			FreqReset();
 			return 1;
 		} else if (key == 'e' || key == 'E') return 2;
 	}

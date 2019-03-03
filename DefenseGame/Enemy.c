@@ -11,13 +11,3 @@ ENEMY* CreateEnemy(int gate) {
 
 	return NewEnemy;
 }
-
-void FreqDown() {
-	FREQ_E_PE -= 10;
-	FREQ_E_AS -= 10;
-}
-
-void FreqReset() {
-	FREQ_E_PE = 50;
-	FREQ_E_AS = 60;
-}

@@ -23,12 +23,14 @@ int AppendNode(HASHLIST *hList, int index, void *NewNode) {		// If successful, t
 
 int ShiftNode(HASHLIST *hList, const char type) {
 	if (type == 'b') {
-		int i;
+		int i, result = 0;
 		for (i = 0; i < 15; i++) {
 			if (hList->BulletGate[i] != NULL) {
 				BULLET *Current = hList->BulletGate[i];
 				while (Current != NULL) {
-					if (CollisionCheck(hList, i) != 0) {
+					result = CollisionCheck(hList, i);
+					if (result == 2) return 2;
+					else if (result != 0) {
 						Current = hList->BulletGate[i];
 					} else if (--(Current->y) < 2) {
 						DeleteHeadNode(hList, i, 'b');
@@ -127,7 +129,7 @@ void PrintHashList(HASHLIST *hList, int exist, const char type) {
 int CollisionCheck(HASHLIST *hList, int index) {
 	if (hList->BulletGate[index] != NULL && hList->EnemyGate[index] != NULL) {
 		if (hList->BulletGate[index]->y < hList->EnemyGate[index]->y) {
-			UpdateScoreOrHeart(hList->BulletGate[index]->y, Score);
+			if (UpdateScoreOrHeart(hList->BulletGate[index]->y, Score) == 2) return 2;
 			PrintCharator(hList->BulletGate[index], 0, 'b');
 			DeleteHeadNode(hList, index, 'b');
 			PrintCharator(hList->EnemyGate[index], 0, 'e');
